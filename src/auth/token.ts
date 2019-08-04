@@ -1,4 +1,3 @@
-// import { CheckTokenOptions, RequestMSOptions, RequestSession, Session, UserData } from 'bc-type-definitions/common/jwt'
 import { NextFunction, Response } from 'express'
 import * as jwt from 'jsonwebtoken'
 import { get } from 'lodash'

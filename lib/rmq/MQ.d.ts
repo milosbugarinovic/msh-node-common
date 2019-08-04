@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { Channel, Connection, Message, Options, Replies } from 'amqplib';
 export declare class MQ {
     private static _conn;
