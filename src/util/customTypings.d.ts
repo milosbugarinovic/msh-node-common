@@ -31,6 +31,7 @@ export interface CheckTokenOptions {
   allowedUrlPaths?: string[]
   allowedAppAuthKeys?: string[]
   authorizationPublicKey: string
+  slackVerificationToken: string
 }
 
 export interface BaseModelAttribute {

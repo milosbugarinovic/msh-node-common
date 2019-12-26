@@ -1,5 +1,5 @@
 import { Router } from 'express';
 export declare abstract class BaseExpressController {
-    readonly router: Router;
+    get router(): Router;
     private _router;
 }
