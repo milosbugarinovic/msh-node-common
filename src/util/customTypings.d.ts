@@ -26,12 +26,19 @@ export interface RequestSession extends Request {
   session?: Session
 }
 
+export interface AllowedToken {
+  urls:string[]
+  tokenLocation: string
+  expectedToken: string
+}
+
 export interface CheckTokenOptions {
   router: Router
   allowedUrlPaths?: string[]
   allowedAppAuthKeys?: string[]
   authorizationPublicKey: string
   slackVerificationToken: string
+  allowedTokens: AllowedToken[]
 }
 
 export interface BaseModelAttribute {

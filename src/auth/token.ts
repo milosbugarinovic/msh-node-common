@@ -23,7 +23,17 @@ const token = {
       // fixme find a better way to check if url is allowed
       if (allowedUrlPaths.includes(req.url.split('?')[0])) return next()
 
-      if (get(options,'slackVerificationToken','no-token') === get(req,'body.token',null)) return next()
+
+      if ( options.slackVerificationToken && options.slackVerificationToken === get(req, 'body.token', null)) return next()
+
+      if (options && options.allowedTokens) {
+        for (const at of options.allowedTokens) {
+          if (at.urls && at.urls.filter(Boolean).length > 0) {
+            if (!at.urls.includes(req.url.split('?')[0])) continue
+          }
+          if(at.expectedToken === get(req,at.tokenLocation)) return next()
+        }
+      }
 
       // check header or url parameters or post parameters for token
       // let token = req.body.token || req.query.token || req.headers['authorization'];
