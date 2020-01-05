@@ -23,9 +23,6 @@ const token = {
       // fixme find a better way to check if url is allowed
       if (allowedUrlPaths.includes(req.url.split('?')[0])) return next()
 
-
-      if ( options.slackVerificationToken && options.slackVerificationToken === get(req, 'body.token', null)) return next()
-
       if (options && options.allowedTokens) {
         for (const at of options.allowedTokens) {
           if (at.urls && at.urls.filter(Boolean).length > 0) {
