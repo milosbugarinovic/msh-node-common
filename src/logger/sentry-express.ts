@@ -2,7 +2,16 @@ import * as Sentry from '@sentry/node'
 import { ErrorRequestHandler, Express, RequestHandler } from 'express'
 import { HttpError } from '../http/error/base'
 
-const express = {
+interface SentryConfig {
+  dsn: string
+  environment: string
+  defaultIntegrations: any[]
+}
+
+const sentryExpress = {
+  init: (options: SentryConfig): void => {
+    return Sentry.init(options)
+  },
   /**
    * Setup express requestHandler
    * Call before any route is called
@@ -25,4 +34,4 @@ const express = {
     })
   },
 }
-export { express }
+export { sentryExpress }

@@ -1,6 +1,6 @@
 const wrapper = {
   /**
-   * Wrap async express http request end return promise or call next on catch
+   * Wrap async sentryExpress http request end return promise or call next on catch
    * @param target
    * @param key
    * @param descriptor

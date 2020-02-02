@@ -2,8 +2,7 @@ import { NextFunction, Response } from 'express'
 import * as jwt from 'jsonwebtoken'
 import { get } from 'lodash'
 import uuidv4 from 'uuid/v4'
-import { winston } from '../logger'
-import { CheckTokenOptions, RequestMSOptions, RequestSession, Session, UserData } from '../util/customTypings'
+import { CheckTokenOptions, RequestSession, Session, UserData } from '../util/customTypings'
 
 const token = {
   check: (options: CheckTokenOptions): void => {
@@ -17,7 +16,7 @@ const token = {
       const sessionId = (req.headers.logSessionId || uuidv4()).toString()
       req.session = {
         id: sessionId,
-        logger: winston.create({ id: sessionId }),
+        logger: global.logger.child({ tags: { sessionId } }),
       } as Session
 
       // fixme find a better way to check if url is allowed
@@ -28,7 +27,7 @@ const token = {
           if (at.urls && at.urls.filter(Boolean).length > 0) {
             if (!at.urls.includes(req.url.split('?')[0])) continue
           }
-          if(at.expectedToken === get(req,at.tokenLocation)) return next()
+          if (at.expectedToken === get(req, at.tokenLocation)) return next()
         }
       }
 
@@ -67,7 +66,7 @@ const token = {
           // if everything is good, save to request for use in other route
           const userData = token.generateUserData(decoded)
           req.session!.userData = userData
-          req.session!.logger = winston.create({ id: sessionId, userData })
+          req.session!.logger = global.logger.child({ tags: { sessionId: req.session!.id, userData } })
           return next()
         }
       })

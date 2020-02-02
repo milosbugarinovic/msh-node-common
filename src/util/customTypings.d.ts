@@ -1,5 +1,6 @@
 import { Logger } from 'winston'
 import { Request, Router } from 'express'
+import { SentryTransportOptions as SentryOptions } from 'winston-transport-sentry-node/dist/transport'
 
 export interface UserData {
   id: number
@@ -27,7 +28,7 @@ export interface RequestSession extends Request {
 }
 
 export interface AllowedToken {
-  urls:string[]
+  urls: string[]
   tokenLocation: string
   expectedToken: string
 }
@@ -48,4 +49,27 @@ export interface BaseModelAttribute {
 
   delete?: boolean
   touched?: boolean
+}
+
+export interface WinstonTransportConfig {
+  transportType: availableTransforms
+  options?: WinstonTransportOptions
+}
+
+export interface WinstonTransportOptions {
+  level?: string
+}
+
+export interface SentryTransportOptions extends WinstonTransportOptions{
+  sentry?: {
+    dsn?: string
+    release?: string
+    environment?: string
+    serverName?: string
+  }
+}
+
+export interface SlackTransportOptions extends WinstonTransportOptions{
+  webhookUrl?: string
+
 }

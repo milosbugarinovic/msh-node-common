@@ -1,13 +1,11 @@
 import { Logger } from 'winston';
-import { UserData } from '../util/customTypings';
+import { WinstonTransportConfig } from '../util/customTypings';
+declare enum AVAILABLE_TRANSFORMS {
+    SENTRY = "SENTRY",
+    SLACK = "SLACK",
+    CONSOLE = "CONSOLE"
+}
 declare const winston: {
-    /**
-     * Create Winston logger with sentry transport
-     * Sentry must be registered first
-     */
-    create: (session?: {
-        id: string;
-        userData?: UserData | undefined;
-    }, consoleLogLevel?: string, sentryLogLevel?: string) => Logger;
+    create: (configs?: WinstonTransportConfig[] | undefined, defaultMeta?: any) => Logger;
 };
-export { winston };
+export { winston, AVAILABLE_TRANSFORMS };

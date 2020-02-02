@@ -1,5 +1,11 @@
 import { Express } from 'express';
-declare const express: {
+interface SentryConfig {
+    dsn: string;
+    environment: string;
+    defaultIntegrations: any[];
+}
+declare const sentryExpress: {
+    init: (options: SentryConfig) => void;
     /**
      * Setup express requestHandler
      * Call before any route is called
@@ -13,4 +19,4 @@ declare const express: {
      */
     errorHandler: (app: Express) => void;
 };
-export { express };
+export { sentryExpress };
