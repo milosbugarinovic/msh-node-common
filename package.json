@@ -16,7 +16,8 @@
     "winston": "3.2.1",
     "winston-daily-rotate-file": "4.4.2",
     "winston-slack-webhook-transport": "1.1.0",
-    "winston-transport-sentry-node": "0.2.0"
+    "winston-transport-sentry-node": "0.2.0",
+    "winston-logstash-ts": "0.2.3"
   },
   "description": "",
   "devDependencies": {

@@ -3,11 +3,13 @@ import { consoleTransport } from './transport/console'
 import { sentryTransport } from './transport/sentry'
 import { slackTransport } from './transport/slack'
 import { WinstonTransportConfig } from '../util/customTypings'
+import { logstashTransport } from './transport/logstash'
 
 enum AVAILABLE_TRANSFORMS {
   SENTRY = 'SENTRY',
   SLACK = 'SLACK',
   CONSOLE = 'CONSOLE',
+  LOGSTASH = 'LOGSTASH',
 }
 
 const winston = {
@@ -27,6 +29,9 @@ const winston = {
           break
         case AVAILABLE_TRANSFORMS.SLACK:
           newTransform = slackTransport.create(cfg.options)
+          break
+        case AVAILABLE_TRANSFORMS.LOGSTASH:
+          newTransform = logstashTransport.create(cfg.options as any)
           break
         case AVAILABLE_TRANSFORMS.CONSOLE:
           newTransform = consoleTransport.create(cfg.options)
