@@ -69,5 +69,5 @@
     "watch": "npm run clean && npm run ts-watch"
   },
   "typings": "./lib/index",
-  "version": "0.1.0"
+  "version": "0.1.2"
 }
