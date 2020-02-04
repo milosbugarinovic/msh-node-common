@@ -1,6 +1,8 @@
-import { Logger } from 'winston'
+import { Logger, Format } from 'winston'
 import { Request, Router } from 'express'
-import { SentryTransportOptions as SentryOptions } from 'winston-transport-sentry-node/dist/transport'
+import { LogstashOption } from 'winston-logstash-ts'
+import exp = require('constants')
+import { ElasticsearchTransportOptions as ESTransportOptions } from 'winston-elasticsearch'
 
 export interface UserData {
   id: number
@@ -60,7 +62,7 @@ export interface WinstonTransportOptions {
   level?: string
 }
 
-export interface SentryTransportOptions extends WinstonTransportOptions{
+export interface SentryTransportOptions extends WinstonTransportOptions {
   sentry?: {
     dsn?: string
     release?: string
@@ -69,7 +71,10 @@ export interface SentryTransportOptions extends WinstonTransportOptions{
   }
 }
 
-export interface SlackTransportOptions extends WinstonTransportOptions{
+export interface SlackTransportOptions extends WinstonTransportOptions {
   webhookUrl?: string
-
 }
+
+export interface LogstashTransportOptions extends WinstonTransportOptions, LogstashOption {}
+
+export interface ElasticSearchTransportOptions extends WinstonTransportOptions, ESTransportOptions {}
