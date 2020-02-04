@@ -70,5 +70,5 @@
     "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" lib"
   },
   "typings": "./lib/index",
-  "version": "0.1.3"
+  "version": "0.1.4"
 }
