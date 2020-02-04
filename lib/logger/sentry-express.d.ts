@@ -3,6 +3,7 @@ interface SentryConfig {
     dsn: string;
     environment: string;
     defaultIntegrations: any[];
+    release: string;
 }
 declare const sentryExpress: {
     init: (options: SentryConfig) => void;

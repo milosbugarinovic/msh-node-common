@@ -34,6 +34,7 @@
     "@types/uuid": "3.4.7",
     "@types/winston": "2.4.4",
     "chai": "4.2.0",
+    "copyfiles": "^2.2.0",
     "diff": ">=4.0.2",
     "mocha": "7.0.1",
     "mock-require": "3.0.3",
@@ -60,13 +61,14 @@
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\" \"src/**/*.json\"",
     "start": "npm run watch",
     "test-unit": "ts-node ./node_modules/jasmine/bin/jasmine ./test/unit/index.ts",
-    "ts-build": "tsc -p tsconfig.json",
+    "ts-build": "tsc -p tsconfig.json && npm run copy-dts",
     "ts-lint": "tslint -p tsconfig.json",
     "ts-lint-check": "tslint-config-prettier-check ./tslint.json",
     "ts-rebuild": "npm run clean && npm run ts-build",
     "ts-watch": "tsc-watch -p tsconfig.json --preserveWatchOutput --onSuccess \"npm run ts-lint\"",
-    "watch": "npm run clean && npm run ts-watch"
+    "watch": "npm run clean && npm run ts-watch",
+    "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" lib"
   },
   "typings": "./lib/index",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }
