@@ -1,6 +1,8 @@
 import { Logger, Format } from 'winston'
 import { Request, Router } from 'express'
 import { LogstashOption } from 'winston-logstash-ts'
+import exp = require('constants')
+import { ElasticsearchTransportOptions as ESTransportOptions } from 'winston-elasticsearch'
 
 export interface UserData {
   id: number
@@ -71,12 +73,8 @@ export interface SentryTransportOptions extends WinstonTransportOptions {
 
 export interface SlackTransportOptions extends WinstonTransportOptions {
   webhookUrl?: string
-
 }
 
-export interface LogstashTransportOptions extends WinstonTransportOptions, LogstashOption {
-  // host?: string
-  // port?: number
-  // protocol?: 'tcp' | 'udp'
-  // format?: Format
-}
+export interface LogstashTransportOptions extends WinstonTransportOptions, LogstashOption {}
+
+export interface ElasticSearchTransportOptions extends WinstonTransportOptions, ESTransportOptions {}

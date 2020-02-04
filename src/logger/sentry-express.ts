@@ -6,6 +6,7 @@ interface SentryConfig {
   dsn: string
   environment: string
   defaultIntegrations: any[]
+  release: string
 }
 
 const sentryExpress = {
