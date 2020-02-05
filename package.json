@@ -1,7 +1,7 @@
 {
   "author": "Milos Bugarinovic <milos.bugarinovic@gmail.com> (http://milos.bugarinovic.com)",
   "dependencies": {
-    "@sentry/node": "5.11.2",
+    "@sentry/node": "5.12.3",
     "amqplib": "0.5.5",
     "app-module-path": "2.2.0",
     "base-64": "0.1.0",
