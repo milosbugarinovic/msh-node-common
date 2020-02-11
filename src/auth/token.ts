@@ -22,6 +22,8 @@ const token = {
       // fixme find a better way to check if url is allowed
       if (allowedUrlPaths.includes(req.url.split('?')[0])) return next()
 
+      req.session.logger.debug('request that need auth', req)
+
       if (options && options.allowedTokens) {
         for (const at of options.allowedTokens) {
           if (at.urls && at.urls.filter(Boolean).length > 0) {
@@ -57,7 +59,7 @@ const token = {
 
       jwt.verify(authToken, options.authorizationPublicKey, (err: any, decoded: any) => {
         if (err) {
-          global.logger.warn(err)
+          req.session!.logger.warn(err)
           return res.status(401).send({
             success: false,
             message: 'Failed to authenticate token.',
