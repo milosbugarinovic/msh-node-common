@@ -22,7 +22,8 @@ const token = {
       // fixme find a better way to check if url is allowed
       if (allowedUrlPaths.includes(req.url.split('?')[0])) return next()
 
-      req.session.logger.debug('request that need auth', req)
+      const { headers, method, originalUrl, params, query, body } = req
+      req.session.logger.debug('request that need auth', { request: { headers, method, originalUrl, params, query, body } })
 
       if (options && options.allowedTokens) {
         for (const at of options.allowedTokens) {
