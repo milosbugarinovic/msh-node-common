@@ -1,17 +1,17 @@
-import { Logger, Format } from 'winston'
+import { Logger } from 'winston'
 import { Request, Router } from 'express'
 import { LogstashOption } from 'winston-logstash-ts'
 import { ElasticsearchTransportOptions as ESTransportOptions } from 'winston-elasticsearch'
 
-export interface UserData {
-  id: number
-  name: string
-  tenantId: number
-  iat: number
-  exp: number
+export type UserData = {
+  id?: number
+  name?: string
+  tenantId?: number
+  iat?: number
+  exp?: number
 }
 
-export interface Session {
+export type Session = {
   id: string
   userData: UserData
   logger: Logger

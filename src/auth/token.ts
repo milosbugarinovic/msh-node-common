@@ -1,7 +1,7 @@
 import { NextFunction, Response } from 'express'
 import * as jwt from 'jsonwebtoken'
 import { get } from 'lodash'
-import uuidv4 from 'uuid/v4'
+import { v4 as uuidv4 } from 'uuid';
 import { CheckTokenOptions, RequestSession, Session, UserData } from '../util/customTypings'
 
 const token = {
@@ -81,13 +81,24 @@ const token = {
     return tokenSplit[tokenSplit.length - 1]
   },
 
+  /**
+   * Generate user data from decoded jwt
+   * @param {object} decoded
+   * @param {number} [decoded.id]
+   * @param {string} [decoded.name]
+   * @param {number} [decoded.personalTenantId]
+   * @param {number} [decoded.exp]
+   * @param {number} [decoded.iat]
+   * @returns {UserData}
+   */
   generateUserData: (decoded: any): UserData => {
+    if (!decoded) return {}
     return {
-      id: get(decoded, 'id', null),
-      name: get(decoded, 'name', null),
-      tenantId: get(decoded, 'personalTenantId', null),
-      exp: get(decoded, 'exp', null),
-      iat: get(decoded, 'iat', null),
+      id: +decoded?.id,
+      name: decoded.name ? decoded.name.toString() : undefined,
+      tenantId: decoded.personalTenantId ? +decoded.personalTenantId : undefined,
+      exp: decoded.exp ? +decoded.exp : undefined,
+      iat: decoded.iat ? +decoded.iat : undefined,
     }
   },
 }
